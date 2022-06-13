@@ -7,39 +7,34 @@ import (
 )
 
 func TestEvenSuccess(t *testing.T) {
-	result := CheckEvenOdd(2)
-	assert.Equal(t, "genap", result, "Test result must be 'genap'")
-}
-
-func TestOddFailed(t *testing.T) {
-	result := CheckEvenOdd(1)
-	assert.Equal(t, "ganjil", result, "Test result must be 'ganjil'")
+	result := CheckEvenOdd(1, 2, 3, 4, 5)
+	assert.Equal(t, "ganjil, genap, ganjil, genap, ganjil", result)
 }
 
 func TestEvenOddWithTable(t *testing.T) {
 	tests := []struct {
 		name     string
-		request  int
+		request  []int
 		expected string
 	}{
 		{
-			name:     "Check even number",
-			request:  2,
-			expected: "genap",
+			name:     "Check Genap",
+			request:  []int{0, 2, 4},
+			expected: "genap, genap, genap",
 		}, {
-			name:     "Check odd number",
-			request:  1,
-			expected: "ganjil",
+			name:     "Check Ganjil",
+			request:  []int{1, 3, 5},
+			expected: "ganjil, ganjil, ganjil",
 		}, {
-			name:     "Check zero",
-			request:  0,
-			expected: "genap",
+			name:     "Check Genap Ganjil",
+			request:  []int{1, 2, 3, 4, 5},
+			expected: "ganjil, genap, ganjil, genap, ganjil",
 		},
 	}
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			result := CheckEvenOdd(test.request)
+			result := CheckEvenOdd(test.request...)
 			assert.Equal(t, test.expected, result)
 		})
 	}

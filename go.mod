@@ -1,4 +1,4 @@
-module github.com/binstro/go_even_odd
+module github.com/binstro/go_even_odd/v2
 
 go 1.18
 
